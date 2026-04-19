@@ -15,6 +15,7 @@ export default function AutomationPage() {
       <BodyClass className="automation-body" />
       <FadeUpObserver />
 
+      <main id="main-content">
       {/* HERO */}
       <section id="hero">
         <div className="container">
@@ -554,6 +555,7 @@ export default function AutomationPage() {
           </div>
         </div>
       </section>
+      </main>
     </>
   );
 }
