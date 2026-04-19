@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AccessibilityWidget from '@/components/AccessibilityWidget';
 
 const heebo = Heebo({
   subsets: ['hebrew', 'latin'],
@@ -20,16 +21,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://autoflowil.co.il'),
+  metadataBase: new URL('https://autoflowil.com'),
   title: 'AutoFlow | 7,000+ אוטומציות לעסק שלך — תשלום חד פעמי',
   description:
     '7,000+ אוטומציות מוכנות לn8n ו-Make.com. חסוך שעות כל שבוע — בלי לקודד. הורד, ייבא, והרץ. ₪200 תשלום חד פעמי לנצח.',
   alternates: {
-    canonical: 'https://autoflowil.co.il',
+    canonical: 'https://autoflowil.com',
   },
   openGraph: {
     type: 'website',
-    url: 'https://autoflowil.co.il',
+    url: 'https://autoflowil.com',
     title: 'AutoFlow | 7,000+ אוטומציות לעסק שלך — תשלום חד פעמי',
     description:
       '7,000+ אוטומציות מוכנות לn8n ו-Make.com. חסוך שעות כל שבוע — בלי לקודד. ₪200 בלבד.',
@@ -56,7 +57,7 @@ const productJsonLd = {
     price: '200',
     priceCurrency: 'ILS',
     availability: 'https://schema.org/InStock',
-    url: 'https://autoflowil.co.il',
+    url: 'https://autoflowil.com',
   },
 };
 
@@ -76,9 +77,13 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <a href="#main-content" className="skip-nav">
+          דלג לתוכן המרכזי
+        </a>
         <Navbar />
         {children}
         <Footer />
+        <AccessibilityWidget />
       </body>
     </html>
   );
