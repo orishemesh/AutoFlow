@@ -12,7 +12,7 @@ export default function RefundPage() {
     <>
       <BodyClass className="legal-body" />
 
-      <main>
+      <main id="main-content">
         <section className="page-hero">
           <div className="container">
             <div className="page-hero-label">מסמך משפטי</div>
@@ -99,10 +99,10 @@ export default function RefundPage() {
                   <h3>צוות התמיכה של AutoFlow</h3>
                   <p>אנחנו כאן לעזור. שלחו לנו מייל ונחזור אליכם בהקדם.</p>
                   <a
-                    href="mailto:support@autoflowil.co.il"
+                    href="mailto:support@autoflowil.com"
                     className="contact-email"
                   >
-                    support@autoflowil.co.il
+                    support@autoflowil.com
                   </a>
                   <p className="response-time">
                     זמן תגובה: עד 48 שעות בימי עסקים
