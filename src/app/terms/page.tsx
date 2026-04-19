@@ -12,7 +12,7 @@ export default function TermsPage() {
     <>
       <BodyClass className="legal-body" />
 
-      <main>
+      <main id="main-content">
         <section className="page-hero">
           <div className="container">
             <div className="page-hero-label">מסמך משפטי</div>
@@ -34,16 +34,16 @@ export default function TermsPage() {
                   AutoFlow (&quot;החברה&quot;, &quot;אנחנו&quot; או
                   &quot;אנו&quot;) היא פלטפורמה ישראלית המספקת ספרייה של תבניות
                   אוטומציה מוכנות לשימוש עבור עסקים ישראליים, הפועלת תחת
-                  הדומיין <strong>autoflowil.co.il</strong>. החברה פועלת בישראל
+                  הדומיין <strong>autoflowil.com</strong>. החברה פועלת בישראל
                   ובכפוף לחוקי מדינת ישראל.
                 </p>
                 <p>
                   לפניות:{' '}
                   <a
-                    href="mailto:support@autoflowil.co.il"
+                    href="mailto:support@autoflowil.com"
                     style={{ color: 'var(--deep-indigo)', fontWeight: 600 }}
                   >
-                    support@autoflowil.co.il
+                    support@autoflowil.com
                   </a>
                 </p>
               </div>
