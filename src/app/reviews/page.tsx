@@ -64,6 +64,7 @@ export default function ReviewsPage() {
       <BodyClass className="reviews-body" />
       <FadeUpObserver />
 
+      <main id="main-content">
       <section id="page-hero">
         <div className="container">
           <span className="section-tag page-hero-tag">ביקורות לקוחות</span>
@@ -109,11 +110,16 @@ export default function ReviewsPage() {
           <p className="reviews-cta-sub">
             7,000+ אוטומציות מוכנות. ₪200 חד פעמי. גישה מיידית.
           </p>
-          <Link href="/#pricing" className="btn-primary btn-large">
-            חזרה לרכישה ← לחץ כאן
+          <Link
+            href="/#pricing"
+            className="btn-primary btn-large"
+            aria-label="חזרה לדף הבית לרכישת החבילה"
+          >
+            חזרה לרכישה ←
           </Link>
         </div>
       </section>
+      </main>
     </>
   );
 }
