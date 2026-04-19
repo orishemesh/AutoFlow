@@ -20,7 +20,7 @@ export default function MobileMenu({ links, ctaHref }: Props) {
       <button
         className="nav-hamburger"
         id="nav-hamburger"
-        aria-label="פתח תפריט"
+        aria-label={open ? 'סגור תפריט' : 'פתח תפריט'}
         aria-expanded={open}
         aria-controls="nav-mobile-menu"
         onClick={() => setOpen((o) => !o)}

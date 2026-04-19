@@ -21,22 +21,22 @@ export default function Footer() {
   // Thank-you page — minimal centered footer
   if (isThankYou) {
     return (
-      <footer role="contentinfo">
+      <footer role="contentinfo" aria-label="כותרת תחתונה">
         <div className="footer-inner-ty">
           <div className="footer-logo">AutoFlow</div>
           <p className="footer-copy">
             © <span>{year}</span> AutoFlow. כל הזכויות שמורות.
           </p>
-          <span className="footer-domain">autoflowil.co.il</span>
+          <span className="footer-domain">autoflowil.com</span>
         </div>
       </footer>
     );
   }
 
   // Legal pages — footer with footer-legal-links (different class)
-  if (isLegal) {
+  if (isLegal || pathname === '/accessibility') {
     return (
-      <footer role="contentinfo">
+      <footer role="contentinfo" aria-label="כותרת תחתונה">
         <div className="container footer-inner">
           <div className="footer-logo-wrap">
             <div className="footer-logo">AutoFlow</div>
@@ -48,11 +48,12 @@ export default function Footer() {
             <Link href="/terms">תנאי שימוש</Link>
             <Link href="/privacy">מדיניות פרטיות</Link>
             <Link href="/refund">מדיניות החזרים</Link>
+            <Link href="/accessibility">הצהרת נגישות</Link>
           </div>
           <p className="footer-copy">
             © <span>{year}</span> AutoFlow. כל הזכויות שמורות.
           </p>
-          <span className="footer-domain">autoflowil.co.il</span>
+          <span className="footer-domain">autoflowil.com</span>
         </div>
       </footer>
     );
@@ -60,7 +61,7 @@ export default function Footer() {
 
   // Home / reviews / use-cases — full footer with nav + inner row
   return (
-    <footer role="contentinfo">
+    <footer role="contentinfo" aria-label="כותרת תחתונה">
       <div
         className="container"
         style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
@@ -73,6 +74,7 @@ export default function Footer() {
           <Link href="/terms">תנאי שימוש</Link>
           <Link href="/privacy">מדיניות פרטיות</Link>
           <Link href="/refund">מדיניות החזרים</Link>
+          <Link href="/accessibility">הצהרת נגישות</Link>
         </nav>
         <div className="footer-inner">
           <div className="footer-logo-wrap">
@@ -84,7 +86,7 @@ export default function Footer() {
           <p className="footer-copy">
             © <span>{year}</span> AutoFlow. כל הזכויות שמורות.
           </p>
-          <span className="footer-domain">autoflowil.co.il</span>
+          <span className="footer-domain">autoflowil.com</span>
         </div>
       </div>
     </footer>
