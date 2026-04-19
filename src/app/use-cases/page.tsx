@@ -103,6 +103,7 @@ export default function UseCasesPage() {
       <BodyClass className="use-cases-body" />
       <FadeUpObserver />
 
+      <main id="main-content">
       <section id="page-hero">
         <div className="container">
           <span className="section-tag page-hero-tag">דוגמאות מהחבילה</span>
@@ -159,6 +160,7 @@ export default function UseCasesPage() {
           </Link>
         </div>
       </section>
+      </main>
     </>
   );
 }
