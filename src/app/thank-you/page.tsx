@@ -59,18 +59,19 @@ export default function ThankYouPage() {
               strokeWidth={2.5}
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            להורדת החבילה ← לחץ כאן
+            להורדת החבילה ←
           </a>
         </div>
         <p className="ty-email-note">קישור להורדה נשלח גם לאימייל שלך</p>
       </section>
 
-      <main className="ty-main">
+      <main id="main-content" className="ty-main">
         <p className="ty-section-label">Getting started</p>
         <h2 className="ty-section-title">מה עכשיו? 🚀</h2>
 
@@ -121,7 +122,7 @@ export default function ThankYouPage() {
               <p className="ty-info-title">לא קיבלת מייל?</p>
               <p className="ty-info-body">
                 בדוק את תיקיית הספאם, לפעמים המיילים מגיעים לשם. אם עדיין לא
-                קיבלת — צור קשר בכתובת info@autoflowil.co.il
+                קיבלת — צור קשר בכתובת support@autoflowil.com
               </p>
             </div>
           </div>
@@ -144,7 +145,7 @@ export default function ThankYouPage() {
             <div>
               <p className="ty-info-title">צריך עזרה?</p>
               <p className="ty-info-body">
-                צוות AutoFlow זמין למענה בכל שאלה. שלח ל-info@autoflowil.co.il
+                צוות AutoFlow זמין למענה בכל שאלה. שלח ל-support@autoflowil.com
                 ונחזור אליך תוך יום עסקים.
               </p>
             </div>
