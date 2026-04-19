@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <>
       <BodyClass className="legal-body" />
 
-      <main>
+      <main id="main-content">
         <section className="page-hero">
           <div className="container">
             <div className="page-hero-label">מסמך משפטי</div>
@@ -139,10 +139,10 @@ export default function PrivacyPage() {
                 <div className="legal-highlight">
                   דוא&quot;ל:{' '}
                   <a
-                    href="mailto:privacy@autoflowil.co.il"
+                    href="mailto:support@autoflowil.com"
                     style={{ color: 'var(--deep-indigo)', fontWeight: 700 }}
                   >
-                    privacy@autoflowil.co.il
+                    support@autoflowil.com
                   </a>
                   <br />
                   אנו מתחייבים להשיב לכל פנייה בתוך 14 ימי עסקים.
