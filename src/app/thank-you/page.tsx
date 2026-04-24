@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import BodyClass from '@/components/BodyClass';
 
 export const metadata: Metadata = {
@@ -14,6 +15,11 @@ export default function ThankYouPage() {
 
       <section className="ty-hero" aria-labelledby="ty-heading">
         <div className="ty-check-wrap">
+
+      {/* Meta Pixel — Purchase event fires on this page after a successful sale */}
+      <Script id="fb-purchase" strategy="afterInteractive">
+        {`fbq('track', 'Purchase', {currency: 'ILS', value: 200.00});`}
+      </Script>
           <div className="ty-check" aria-hidden="true">
             <span className="pulse-ring" />
             <svg
