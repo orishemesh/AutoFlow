@@ -16,7 +16,8 @@ export default function Footer() {
   const isLegal =
     pathname === '/terms' ||
     pathname === '/privacy' ||
-    pathname === '/refund';
+    pathname === '/refund' ||
+    pathname === '/contact';
 
   // Thank-you page — minimal centered footer
   if (isThankYou) {
@@ -49,6 +50,7 @@ export default function Footer() {
             <Link href="/privacy">מדיניות פרטיות</Link>
             <Link href="/refund">מדיניות החזרים</Link>
             <Link href="/accessibility">הצהרת נגישות</Link>
+            <Link href="/contact">יצירת קשר</Link>
           </div>
           <p className="footer-copy">
             © <span>{year}</span> AutoFlow. כל הזכויות שמורות.
@@ -75,6 +77,7 @@ export default function Footer() {
           <Link href="/privacy">מדיניות פרטיות</Link>
           <Link href="/refund">מדיניות החזרים</Link>
           <Link href="/accessibility">הצהרת נגישות</Link>
+          <Link href="/contact">יצירת קשר</Link>
         </nav>
         <div className="footer-inner">
           <div className="footer-logo-wrap">
