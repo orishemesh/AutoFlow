@@ -17,7 +17,8 @@ export default function Footer() {
     pathname === '/terms' ||
     pathname === '/privacy' ||
     pathname === '/refund' ||
-    pathname === '/contact';
+    pathname === '/contact' ||
+    pathname === '/product-liability';
 
   // Thank-you page — minimal centered footer
   if (isThankYou) {
@@ -49,6 +50,7 @@ export default function Footer() {
             <Link href="/terms">תנאי שימוש</Link>
             <Link href="/privacy">מדיניות פרטיות</Link>
             <Link href="/refund">מדיניות החזרים</Link>
+            <Link href="/product-liability">אחריות מוצר</Link>
             <Link href="/accessibility">הצהרת נגישות</Link>
             <Link href="/contact">יצירת קשר</Link>
           </div>
@@ -76,6 +78,7 @@ export default function Footer() {
           <Link href="/terms">תנאי שימוש</Link>
           <Link href="/privacy">מדיניות פרטיות</Link>
           <Link href="/refund">מדיניות החזרים</Link>
+          <Link href="/product-liability">אחריות מוצר</Link>
           <Link href="/accessibility">הצהרת נגישות</Link>
           <Link href="/contact">יצירת קשר</Link>
         </nav>
