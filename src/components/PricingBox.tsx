@@ -24,7 +24,7 @@ export default function PricingBox() {
             תשלום חד פעמי. גישה לנצח. אפס דמי מנוי.
           </p>
           <div style={{ marginBottom: 0 }}>
-            <Link href="/thank-you" className="btn-primary btn-large">
+            <Link href="/checkout" className="btn-primary btn-large">
               קבל גישה מיידית ←
             </Link>
           </div>
