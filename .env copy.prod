@@ -1,0 +1,14 @@
+MORNING_ACCESS_TOKEN_URL=https://api.morning.co/idp/v1/oauth/token
+WEBHOOK_URL=https://ori-shemesh.app.n8n.cloud/webhook/dae87866-3fc7-4107-af44-2c9540eae52a
+MORNING_API_SECRET=JmkT?P)abK=$kOk>4!4>TVI@ggOQM%*O
+MORNING_API_KEY=e5cb56b2-9a31-48a3-99c9-fc84136e85cc
+MORNING_API_URL=https://api.greeninvoice.co.il
+MORNING_PLUGIN_ID=72881883-5ff0-4d47-a5ff-25a09bcdcafa
+SUCCESS_URL=/thank-you
+FAILED_URL=/payment/fail
+TTL=3600
+CHECK_PERIOD=600
+DESCRIPTION_ORDER=תשלום עבור אוטומציות
+NOTIFY_URL=/api/payment/notify
+BASE_URL=https://autoflowil.com
+AMOUNT=200

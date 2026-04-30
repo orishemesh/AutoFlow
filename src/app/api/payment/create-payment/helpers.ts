@@ -1,3 +1,5 @@
+import logger from "@/lib/logger";
+
 export interface IPaymentMetadata {
   name: string;
   email: string;
@@ -11,46 +13,81 @@ export interface IPaymentResposne extends IPaymentMetadata {
 }
 
 export async function getAccessToken() {
-  const payload = getJWTTokenPayload();
-  const tokenRes = await fetch(`${process.env.MORNING_ACCESS_TOKEN_URL}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const payload = getJWTTokenPayload();
+    const tokenRes = await fetch(`${process.env.MORNING_ACCESS_TOKEN_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
 
-  if (!tokenRes.ok) {
-    throw new Error('Failed to get Morning token');
+    if (!tokenRes.ok) {
+      const errorText = await tokenRes.text();
+      throw new Error('Failed to get Morning token');
+    }
+
+    const tokenData = await tokenRes.json();
+    return tokenData.accessToken;
+  } catch (error: any) {
+    logger.error(`Error in getAccessToken: ${error.message}`, { stack: error.stack });
+    throw error;
   }
-
-  const tokenData = await tokenRes.json();
-  return tokenData.accessToken;
 }
 
 export async function getPaymentForm(token: string, data: IPaymentMetadata, localPaymentId: string) {
-  const payload = getPaymentPayload({ ...data, paymentId: localPaymentId });
-  const paymentRes = await fetch(`${process.env.MORNING_API_URL}/api/v1/payments/form`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const payload = getPaymentPayload({ ...data, paymentId: localPaymentId });
+    logger.info(`Creating payment form for email: ${data.email}, paymentID: ${localPaymentId}`);
+    
+    const paymentRes = await fetch(`${process.env.MORNING_API_URL}/api/v1/payments/form`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
-  const paymentData = await paymentRes.json();
-  return paymentData.url;
+    if (!paymentRes.ok) {
+      const errorText = await paymentRes.text();
+      logger.error(`Failed to create payment form: ${paymentRes.status} ${paymentRes.statusText} - ${errorText}`);
+      throw new Error('Failed to create payment form');
+    }
+
+    const paymentData = await paymentRes.json();
+    logger.info(`Payment form created successfully: ${paymentData.url}`);
+    return paymentData.url;
+  } catch (error: any) {
+    logger.error(`Error in getPaymentForm: ${error.message}`, { stack: error.stack });
+    throw error;
+  }
 }
 
 export async function sendPaymentToWebhook(data: IPaymentResposne) {
-  return await fetch(`${process.env.WEBHOOK_URL}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    logger.info(`Sending payment notification to webhook for email: ${data.email}, paymentId: ${data.paymentId}`);
+    const response = await fetch(`${process.env.WEBHOOK_URL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      logger.warn(`Webhook notification returned non-ok status: ${response.status} - ${errorText}`);
+    } else {
+      logger.info('Webhook notification sent successfully');
+    }
+    
+    return response;
+  } catch (error: any) {
+    logger.error(`Error sending to webhook: ${error.message}`, { stack: error.stack });
+    throw error;
+  }
 }
 
 
