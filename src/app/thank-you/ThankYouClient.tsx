@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 function ThankYouContent() {
   const searchParams = useSearchParams();
-  const paymentId = searchParams.get('paymentId');
+  const paymentId = sessionStorage.get('paymentId');
   
   const [isVerifying, setIsVerifying] = useState(true);
   const [isVerified, setIsVerified] = useState(false);

@@ -1,19 +1,18 @@
 import { paymentCache } from "@/lib/cache";
 import { NextResponse } from "next/server";
-import { sendPaymentToWebhook } from "../create-payment/helpers";
+import { sendPaymentToWebhook, extractPaymentId } from "../create-payment/helpers";
 import logger from "@/lib/logger";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.text();
+    const text = await req.text();
 
-    logger.info("🔔 [NOTIFY URL] WEBHOOK RECEIVED", { payload: body });
+    logger.info("🔔 [NOTIFY URL] WEBHOOK RECEIVED", { payload: text });
 
-    const paymentId = 'body.custom?.paymentId';
-    // const paymentId = body.custom?.split("paymentId=")[1]?.split("&")[0];
+    const paymentId = extractPaymentId(text)?.trim();
     
     if (!paymentId) {
-      logger.warn("Webhook received without paymentId in custom field", { body });
+      logger.warn("Webhook received without paymentId in custom field", { text });
       return NextResponse.json({ error: "No paymentId found" }, { status: 400 });
     }
 

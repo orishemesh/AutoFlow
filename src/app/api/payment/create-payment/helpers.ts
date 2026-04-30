@@ -122,14 +122,13 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
     successUrl,
     failureUrl,
   }
-  const custom = `paymentId=${paymentId}&email=${email}`
+  const custom = `paymentId=${paymentId}`
 
   return {
     client,
     description,
     amount,
     custom,
-    remarks: custom,
     ...paymentConfig,
     ...urls,
   }
@@ -140,5 +139,23 @@ function getJWTTokenPayload() {
     'grant_type': 'client_credentials',
     'client_id': process.env.MORNING_API_KEY,
     'client_secret': process.env.MORNING_API_SECRET,
+  }
+}
+
+export function extractPaymentId(payloadString: string) {
+  try {
+    const params = new URLSearchParams(payloadString);
+
+    const externalDataEncoded = params.get("external_data");
+    if (!externalDataEncoded) return null;
+
+    const externalData = new URLSearchParams(
+      decodeURIComponent(externalDataEncoded)
+    );
+
+    return externalData.get("paymentId");
+  } catch (err) {
+    console.error("Failed to extract paymentId:", err);
+    return null;
   }
 }
