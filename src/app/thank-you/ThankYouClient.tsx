@@ -14,7 +14,6 @@ function ThankYouContent() {
   
   const [isVerifying, setIsVerifying] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
@@ -54,33 +53,17 @@ function ThankYouContent() {
     }
   }, [paymentId]);
 
-  const handleDownload = async (e: React.MouseEvent) => {
+  const handleDownload = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isVerified) return;
     
-    setIsDownloading(true);
-    try {
-      const res = await fetch(`/api/download?paymentId=${paymentId}`, {
-        method: 'GET'
-      });
-      
-      if (!res.ok) throw new Error("Failed to download");
-      
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      a.download = 'AutoFlow - Full Pack.zip';
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (error) {
-      alert("שגיאה בהורדת הקובץ. אנא פנה לשירות הלקוחות במידה והבעיה נמשכת.");
-    } finally {
-      setIsDownloading(false);
-    }
+    // Direct download from public folder
+    const link = document.createElement('a');
+    link.href = '/AutoFlow.zip';
+    link.download = 'AutoFlow - Full Pack.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -150,7 +133,7 @@ function ThankYouContent() {
               onClick={handleDownload}
               className="ty-download-btn"
               aria-label="הורד את חבילת AutoFlow"
-              style={{ opacity: isDownloading ? 0.6 : 1, cursor: isDownloading ? 'wait' : 'pointer' }}
+              style={{ cursor: 'pointer' }}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -165,7 +148,7 @@ function ThankYouContent() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              {isDownloading ? 'מוריד אל המערכת...' : 'להורדת החבילה ←'}
+              להורדת החבילה ←
             </a>
           </div>
         )}
