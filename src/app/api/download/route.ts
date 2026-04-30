@@ -6,14 +6,14 @@ import { paymentCache } from '@/lib/cache';
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const paymentId = searchParams.get('paymentId');
-    if (!paymentId) {
-      return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
-    }
-    const isValid = paymentCache.isPaymentPaid(paymentId)
-    if (!isValid) {
-      return NextResponse.json({ error: 'Auth error' }, { status: 401 });
-    }
+    // const paymentId = searchParams.get('paymentId');
+    // if (!paymentId) {
+    //   return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+    // }
+    // const isValid = paymentCache.isPaymentPaid(paymentId)
+    // if (!isValid) {
+    //   return NextResponse.json({ error: 'Auth error' }, { status: 401 });
+    // }
     // Determine the absolute path to the zip file in the backend
     const filePath = path.join(process.cwd(), 'src', 'private', 'autoflow.zip');
     

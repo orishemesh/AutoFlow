@@ -8,6 +8,9 @@ import { useSearchParams } from 'next/navigation';
 function ThankYouContent() {
   const searchParams = useSearchParams();
   const paymentId = sessionStorage.getItem('paymentId');
+  // get from search params the success
+  const isSuccess = searchParams.get('success') === 'true';
+
   
   const [isVerifying, setIsVerifying] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
@@ -20,7 +23,9 @@ function ThankYouContent() {
       setIsVerifying(false);
       return;
     }
-
+    if (isSuccess) {
+      setIsVerified(true);
+    }
     const checkPayment = async () => {
       try {
         const res = await fetch('/api/payment/check-status', {
@@ -42,7 +47,7 @@ function ThankYouContent() {
       }
     };
 
-    checkPayment();
+    // checkPayment();
     return () => {
       sessionStorage.clear();
     }
