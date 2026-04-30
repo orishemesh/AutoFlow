@@ -100,8 +100,8 @@ export default function CheckoutPage() {
       }
     } catch (error) {
       console.error(error);
-      router.push('/payment');
-      // router.push('/payment/fail');
+      // router.push('/payment');
+      router.push('/payment/fail');
       setIsLoading(false);
     }
   };

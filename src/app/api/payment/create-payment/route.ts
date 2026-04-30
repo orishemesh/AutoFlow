@@ -7,17 +7,15 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { name, email, phone, city } = body;
-    
+
     // Create a local ID using the cache manager class and store initial payment details
 
     const token = await getAccessToken();
     const payment = {
-       name, email, phone, city
+      name, email, phone, city
     }
-    const paymentId = paymentCache.createPayment({...payment, amount: Number(process.env.AMOUNT)});
+    const paymentId = paymentCache.createPayment({ ...payment, amount: Number(process.env.AMOUNT) });
 
-    console.log("Creating payment:", paymentId);
-    console.log("Creating payment:", token);
 
     // Pass the localPaymentId to the payment form if needed
     const paymentUrl = await getPaymentForm(token, payment, paymentId);
@@ -28,7 +26,7 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Payment creation failed" },
+      { error: "Payment creation failed", e: error },
       { status: 500 }
     );
   }

@@ -11,12 +11,13 @@ export interface IPaymentResposne extends IPaymentMetadata {
 }
 
 export async function getAccessToken() {
-  const tokenRes = await fetch(`${process.env.ACCESS_TOKEN_MORNING}`, {
+  const payload = getJWTTokenPayload();
+  const tokenRes = await fetch(`${process.env.MORNING_ACCESS_TOKEN_URL}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(getJWTTokenPayload()),
+    body: JSON.stringify(payload),
   });
 
   if (!tokenRes.ok) {
@@ -28,19 +29,15 @@ export async function getAccessToken() {
 }
 
 export async function getPaymentForm(token: string, data: IPaymentMetadata, localPaymentId: string) {
+  const payload = getPaymentPayload({ ...data, paymentId: localPaymentId });
   const paymentRes = await fetch(`${process.env.MORNING_API_URL}/api/v1/payments/form`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(getPaymentPayload({ ...data, paymentId: localPaymentId })),
+    body: JSON.stringify(payload),
   });
-
-  if (!paymentRes.ok) {
-    const errorText = await paymentRes.text();
-    throw new Error(errorText);
-  }
 
   const paymentData = await paymentRes.json();
   return paymentData.url;
@@ -63,7 +60,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
   const successUrl = `${baseUrl}${process.env.SUCCESS_URL}`;
   const failureUrl = `${baseUrl}${process.env.FAILED_URL}`;
   const notifyUrl = `${baseUrl}${process.env.NOTIFY_URL}`;
-  const amount = process.env.AMOUNT;
+  const amount = Number(process.env.AMOUNT);
 
   const client = {
     emails: [email],
@@ -78,6 +75,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
     vatType: 1,
     type: 400,
     group: 100,
+    pluginId: process.env.MORNING_PLUGIN_ID,
     maxPayments: 1,
   }
 
