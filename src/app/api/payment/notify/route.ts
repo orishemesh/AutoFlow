@@ -5,11 +5,12 @@ import logger from "@/lib/logger";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = await req.text();
 
     logger.info("🔔 [NOTIFY URL] WEBHOOK RECEIVED", { payload: body });
 
-    const paymentId = body.custom?.split("paymentId=")[1]?.split("&")[0];
+    const paymentId = 'body.custom?.paymentId';
+    // const paymentId = body.custom?.split("paymentId=")[1]?.split("&")[0];
     
     if (!paymentId) {
       logger.warn("Webhook received without paymentId in custom field", { body });
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
     }
 
     logger.info(`Forwarding payment data to external webhook for: ${webookData.email}`);
-    await sendPaymentToWebhook(webookData);
+    // await sendPaymentToWebhook(webookData);
 
     return NextResponse.json({ success: true, message: "Webhook received successfully" });
 
