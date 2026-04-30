@@ -5,7 +5,7 @@ import BodyClass from '@/components/BodyClass';
 import './payment.css';
 
 export default function PaymentPage() {
-  const [paymentUrl, setPaymentUrl] = useState('https://mrng.to/aaP9y69JJF'); // Placeholder as requested
+  const [paymentUrl, setPaymentUrl] = useState(''); // Placeholder as requested
   const [isClearing, setIsClearing] = useState(false);
 
   useEffect(() => {
