@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     //   return NextResponse.json({ error: 'Auth error' }, { status: 401 });
     // }
     // Determine the absolute path to the zip file in the backend
-    const filePath = path.join(process.cwd(), 'src', 'private', 'autoflow.zip');
+    const filePath = path.join(process.cwd(), 'public', 'autoflow.zip');
     
     if (!fs.existsSync(filePath)) {
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
