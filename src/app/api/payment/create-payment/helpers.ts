@@ -9,6 +9,7 @@ export interface IPaymentMetadata {
 
 
 export interface IPaymentResposne extends IPaymentMetadata {
+  paymentId: string;
   success: boolean;
 }
 

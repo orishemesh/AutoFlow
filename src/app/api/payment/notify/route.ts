@@ -27,10 +27,10 @@ export async function POST(req: Request) {
     }
 
     const webookData = {
-      email: data?.email || "unknown",
-      name: data?.name || "unknown",
-      phone: data?.phone || "unknown",
-      city: data?.city || "unknown",
+      email: data?.email,
+      name: data?.name ,
+      phone: data?.phone,
+      city: data?.city,
       paymentId: paymentId,
       success: true,
     }
