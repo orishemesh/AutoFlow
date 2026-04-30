@@ -97,7 +97,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
   const description = process.env.DESCRIPTION_ORDER;
   const successUrl = `${baseUrl}${process.env.SUCCESS_URL}`;
   const failureUrl = `${baseUrl}${process.env.FAILED_URL}`;
-  const notifyUrl = `${baseUrl}${process.env.NOTIFY_URL}`;
+  const notifyUrl = process.env.WEBHOOK_URL;
   const amount = Number(process.env.AMOUNT);
 
   const client = {
@@ -122,7 +122,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
     successUrl,
     failureUrl,
   }
-  const custom = `paymentId=${paymentId}`
+  const custom = `paymentId=${paymentId}&email=${email}&name=${name}&phone=${phone}&city=${city}`
 
   return {
     client,
