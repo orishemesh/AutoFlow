@@ -129,6 +129,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
     description,
     amount,
     custom,
+    remarks: custom,
     ...paymentConfig,
     ...urls,
   }
