@@ -19,6 +19,7 @@ class PaymentCacheManager {
    */
   public createPayment(data: any): string {
     const id = uuidv4();
+    this.cache.mget
     this.cache.set(id, { ...data, id, success: false, status: 'pending', createdAt: new Date().toISOString() });
     return id;
   }
@@ -33,6 +34,8 @@ class PaymentCacheManager {
     const updatedPayment = { ...existing, ...data, status: 'paid', success: true }
     console.log("Updating payment:", updatedPayment);
     console.log("Existing payment:", existing);
+    const all = this.cache.keys();
+    console.log("All keys:", all);
     if (existing) {
       this.cache.set(id, { ...updatedPayment, id, updatedAt: new Date().toISOString() });
     } else {
