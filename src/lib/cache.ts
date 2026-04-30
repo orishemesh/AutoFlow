@@ -20,7 +20,7 @@ class PaymentCacheManager {
   public createPayment(data: any): string {
     const id = uuidv4();
     this.cache.mget
-    this.cache.set(id, { ...data, id, success: false, status: 'pending', createdAt: new Date().toISOString() });
+    this.cache.set(id, { ...data, id, success: false, status: 'pending', createdAt: new Date().toISOString() }, TTL);
     return id;
   }
 
