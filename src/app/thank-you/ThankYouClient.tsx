@@ -25,6 +25,7 @@ function ThankYouContent() {
     }
     if (isSuccess) {
       setIsVerified(true);
+      setIsVerifying(false);
     }
     const checkPayment = async () => {
       try {
