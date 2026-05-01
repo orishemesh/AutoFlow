@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAccessToken, getPaymentForm } from "./helpers";
-import { paymentCache } from "@/lib/cache";
+import { v7 as uuidv7 } from "uuid";
 import logger from "@/lib/logger";
 
 export async function POST(req: Request) {
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const payment = {
       name, email, phone, city
     }
-    const paymentId = paymentCache.createPayment({ ...payment, amount: Number(process.env.AMOUNT) });
+    const paymentId = uuidv7();
 
     logger.info(`Payment record created in cache with ID: ${paymentId}`);
 

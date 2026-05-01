@@ -41,7 +41,7 @@ export async function getPaymentForm(token: string, data: IPaymentMetadata, loca
   try {
     const payload = getPaymentPayload({ ...data, paymentId: localPaymentId });
     logger.info(`Creating payment form for email: ${data.email}, paymentID: ${localPaymentId}`);
-    
+
     const paymentRes = await fetch(`${process.env.MORNING_API_URL}/api/v1/payments/form`, {
       method: "POST",
       headers: {
@@ -66,7 +66,7 @@ export async function getPaymentForm(token: string, data: IPaymentMetadata, loca
   }
 }
 
-export async function sendPaymentToWebhook(data: IPaymentResposne) {
+export async function sendPaymentToWebhook(data: any) {
   try {
     logger.info(`Sending payment notification to webhook for email: ${data.email}, paymentId: ${data.paymentId}`);
     const response = await fetch(`${process.env.WEBHOOK_URL}`, {
@@ -83,7 +83,7 @@ export async function sendPaymentToWebhook(data: IPaymentResposne) {
     } else {
       logger.info('Webhook notification sent successfully');
     }
-    
+
     return response;
   } catch (error: any) {
     logger.error(`Error sending to webhook: ${error.message}`, { stack: error.stack });
@@ -97,7 +97,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
   const description = process.env.DESCRIPTION_ORDER;
   const successUrl = `${baseUrl}${process.env.SUCCESS_URL}`;
   const failureUrl = `${baseUrl}${process.env.FAILED_URL}`;
-  const notifyUrl = process.env.WEBHOOK_URL;
+  const notifyUrl = `${baseUrl}${process.env.NOTIFY_URL}`;
   const amount = Number(process.env.AMOUNT);
 
   const client = {
@@ -122,7 +122,7 @@ function getPaymentPayload({ city, name, email, phone, paymentId }: IPaymentMeta
     successUrl,
     failureUrl,
   }
-  const custom = `paymentId=${paymentId}&email=${email}&name=${name}&phone=${phone}&city=${city}`
+  const custom = `paymentId=${paymentId}&email=${email}&name=${name}&phone=${phone}&city=${city}&amount=${amount}`.trim();
 
   return {
     client,
@@ -142,18 +142,16 @@ function getJWTTokenPayload() {
   }
 }
 
-export function extractPaymentId(payloadString: string) {
+export function extractPaymentData(payloadString: string) {
   try {
     const params = new URLSearchParams(payloadString);
-
     const externalDataEncoded = params.get("external_data");
-    if (!externalDataEncoded) return null;
 
-    const externalData = new URLSearchParams(
-      decodeURIComponent(externalDataEncoded)
-    );
+    const decoded = decodeURIComponent(externalDataEncoded!);
+    const externalParams = new URLSearchParams(decoded);
 
-    return externalData.get("paymentId");
+    const result = Object.fromEntries(externalParams.entries());
+    return result;
   } catch (err) {
     console.error("Failed to extract paymentId:", err);
     return null;
