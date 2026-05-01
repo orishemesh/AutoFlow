@@ -26,28 +26,7 @@ function ThankYouContent() {
       setIsVerified(true);
       setIsVerifying(false);
     }
-    const checkPayment = async () => {
-      try {
-        const res = await fetch('/api/payment/check-status', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ paymentId })
-        });
-        const data = await res.json();
-        
-        if (res.ok && data.success) {
-          setIsVerified(true);
-        } else {
-          setErrorMsg("כנראה שהתשלום נכשל או שהדף לא זמין נא ליצור קשר עם השירות");
-        }
-      } catch (err) {
-        setErrorMsg("שגיאה בתקשורת עם שרת האימות.");
-      } finally {
-        setIsVerifying(false);
-      }
-    };
 
-    // checkPayment();
     return () => {
       sessionStorage.clear();
     }
