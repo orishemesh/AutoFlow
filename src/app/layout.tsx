@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   title: 'AutoFlow | 7,000+ אוטומציות לעסק שלך — תשלום חד פעמי',
   description:
     '7,000+ אוטומציות מוכנות לn8n ו-Make.com. חסוך שעות כל שבוע — בלי לקודד. הורד, ייבא, והרץ. ₪200 תשלום חד פעמי לנצח.',
+  alternates: {
     canonical: 'https://autoflowil.com',
   },
   openGraph: {
@@ -44,7 +45,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -60,7 +60,6 @@ const productJsonLd = {
     url: 'https://autoflowil.com',
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -99,7 +98,6 @@ export default function RootLayout({
         <Footer />
         <AccessibilityWidget />
 
-
         {/* Meta Pixel — PageView fires on every page */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
@@ -117,3 +115,15 @@ export default function RootLayout({
         </Script>
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1264275459220919&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+      </body>
+    </html>
+  );
+}
