@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import BodyClass from '@/components/BodyClass';
 import './checkout.css';
@@ -23,7 +23,17 @@ export default function CheckoutPage() {
     phone: ''
   });
 
-  const validatePhone = (phone: string) => {
+// Fire Facebook Pixel InitiateCheckout event on page load
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+      window.fbq('track', 'InitiateCheckout', {
+        value: 200,
+        currency: 'ILS',
+      });
+    }
+  }, []);
+
+    const validatePhone = (phone: string) => {
     // Validates Israeli phone numbers (mobile or landline)
     const regex = /^(05\d|07\d|0[23489])\-?\d{7}$/;
     return regex.test(phone);
